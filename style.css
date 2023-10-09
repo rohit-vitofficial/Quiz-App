@@ -65,6 +65,6 @@ body{
     margin: 20px auto 0;
     border-radius: 4px;
     cursor: pointer;
-    display: block;
+    display: none;
 }
 
