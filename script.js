@@ -11,10 +11,20 @@ const questions = [
     {
         question:"You Live in ",
         answer:[
-            {text:"Nepa;", correct: false},
-            {text:"Nepa;", correct: false},
-            {text:"Vellore", correct: true},
-            {text:"India", correct: false}
+            {text:"Nepal", correct: false},
+            {text:"China", correct: false},
+            {text:"India", correct: true},
+            {text:"Pakistan", correct: false}
+        ]
+    },
+    {
+        question:"How is an array initialized in C language?",
+        answer:[
+            {text:"int[] a = {1,2,3}",correct:false},
+            {text:"int a[3] = {1,2,3}",correct:true},
+            {text:"int[] a = new int[3]",correct:false},
+            {text:"int a = {1,2,3}",correct:false},
+            
         ]
     }
 ];
