@@ -56,7 +56,98 @@ const questions = [
             {text:"25%",correct:false},
             
         ]
+    },
+    {
+        question: "What is the binary system in computing?",
+        answer: [
+            { text: "A system of 10 digits (0-9)", correct: false },
+            { text: "A system of 8 digits (0-7)", correct: false },
+            { text: "A system of 2 digits (0 and 1)", correct: true },
+            { text: "A system of 16 digits (0-15)", correct: false },
+        ]
+    },
+    {
+        question: "What is an operating system?",
+        answer: [
+            { text: "A type of software used for word processing", correct: false },
+            { text: "The physical components of a computer", correct: false },
+            { text: "Software that manages computer hardware and provides services for computer programs", correct: true },
+            { text: "A hardware component used for data storage", correct: false },
+        ]
+    },
+    {
+        question: "What does CPU stand for?",
+        answer: [
+            { text: "Central Processing Unit", correct: true },
+            { text: "Computer Peripheral Unit", correct: false },
+            { text: "Central Print Unit", correct: false },
+            { text: "Control Panel Unit", correct: false },
+        ]
+    },
+    {
+        question: "What is RAM in a computer?",
+        answer: [
+            { text: "Random Access Memory", correct: true },
+            { text: "Read-Only Memory", correct: false },
+            { text: "Real-time Application Management", correct: false },
+            { text: "Remote Access Module", correct: false },
+        ]
+    },
+    {
+        question: "What is a compiler in programming?",
+        answer: [
+            { text: "A hardware component of a computer", correct: false },
+            { text: "A device used for input and output operations", correct: false },
+            { text: "A software that translates high-level programming code into machine code", correct: true },
+            { text: "A type of programming language", correct: false },
+        ]
+    },
+    {
+        question: "What is an IP address used for in networking?",
+        answer: [
+            { text: "To send emails", correct: false },
+            { text: "To identify a computer or device on a network", correct: true },
+            { text: "To store data on a server", correct: false },
+            { text: "To display web pages", correct: false },
+        ]
+    },
+    {
+        question: "What is a firewall in computer security?",
+        answer: [
+            { text: "A protective barrier around a computer", correct: false },
+            { text: "A software or hardware system that prevents unauthorized access to or from a private network", correct: true },
+            { text: "A type of antivirus software", correct: false },
+            { text: "A device used to increase network speed", correct: false },
+        ]
+    },
+    {
+        question: "What is a motherboard in a computer?",
+        answer: [
+            { text: "The main circuit board that houses the CPU, RAM, and other key components", correct: true },
+            { text: "A type of software used for graphics design", correct: false },
+            { text: "A peripheral device for audio input and output", correct: false },
+            { text: "A type of computer monitor", correct: false },
+        ]
+    },
+    {
+        question: "What does HTML stand for in web development?",
+        answer: [
+            { text: "Hyperlink and Text Markup Language", correct: false },
+            { text: "Highly Textual Markup Language", correct: false },
+            { text: "Hypertext Markup Language", correct: true },
+            { text: "Hyper Transfer Markup Language", correct: false },
+        ]
+    },
+    {
+        question: "What is a database in computing?",
+        answer: [
+            { text: "A computer's file system", correct: false },
+            { text: "A collection of related data organized for efficient retrieval", correct: true },
+            { text: "A type of computer virus", correct: false },
+            { text: "A network of interconnected computers", correct: false },
+        ]
     }
+    
 ];
 
 const questionElement = document.getElementById("question");
