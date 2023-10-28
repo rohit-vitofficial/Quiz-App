@@ -26,6 +26,36 @@ const questions = [
             {text:"int a = {1,2,3}",correct:false},
             
         ]
+    },
+    {
+        question:"700 ml of a mixture contains milk and water in the ratio of 4:3. How much more milk is needed to make the ratio 4:1?",
+        answer:[
+            {text:"900ml",correct:false},
+            {text:"800ml",correct:false},
+            {text:"700ml",correct:false},
+            {text:"650ml",correct:true},
+            
+        ]
+    },
+    {
+        question:"what is the return type of malloc() and calloc()?",
+        answer:[
+            {text:"bool *",correct:false},
+            {text:"void *",correct:true},
+            {text:"int *",correct:false},
+            {text:"char *",correct:false},
+            
+        ]
+    },
+    {
+        question:"A=20% of B and B:C=4:5. What percentage of A is C?",
+        answer:[
+            {text:"625%",correct:true},
+            {text:"600%",correct:false},
+            {text:"125%",correct:false},
+            {text:"25%",correct:false},
+            
+        ]
     }
 ];
 
