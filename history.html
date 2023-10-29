@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz History</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+    <h1>Quiz History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Difficulty Level</th>
+                <th>Best Score</th>
+            </tr>
+        </thead>
+        <tbody id="score-table">
+        </tbody>
+    </table>
+    </div>
+    <script>
+        // Function to fetch and display scores from local storage
+        function displayScores() {
+            const scoreTable = document.getElementById("score-table");
+            const scores = JSON.parse(localStorage.getItem("quizScores")) || {};
+            for (const difficulty in scores) {
+                const bestScore = scores[difficulty];
+                const row = scoreTable.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = difficulty;
+                cell2.textContent = bestScore;
+            }
+        }
+
+        displayScores();
+    </script>
+</body>
+</html>
