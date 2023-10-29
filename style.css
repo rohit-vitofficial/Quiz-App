@@ -73,4 +73,31 @@ body{
 .incorrect{
     background: #ff9393;
 }
-
+.level-buttons button{
+    background: #43b0bc;
+    color: #222;
+    font-weight:500;
+    width: 30%;
+    border:1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+    transition:all 0.3s;
+}
+#timer {
+    font-size: 20px;
+    font-weight: 600;
+    color: #001e4d;
+    text-align: right;
+    margin: 20px 0;
+}
+#history-button {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1654b8;
+    text-align: center;
+    margin: 20px 10px;
+    float: right;
+}

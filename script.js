@@ -1,243 +1,289 @@
-const questions = [
-    {
-        question:"Your name is ?",
-        answer:[
-            {text:"Rohit", correct: true},
-            {text:"Rahul", correct: false},
-            {text:"Rahul", correct: false},
-            {text:"Rahul", correct: false}
-        ]
-    },
-    {
-        question:"You Live in ",
-        answer:[
-            {text:"Nepal", correct: false},
-            {text:"China", correct: false},
-            {text:"India", correct: true},
-            {text:"Pakistan", correct: false}
-        ]
-    },
-    {
-        question:"How is an array initialized in C language?",
-        answer:[
-            {text:"int[] a = {1,2,3}",correct:false},
-            {text:"int a[3] = {1,2,3}",correct:true},
-            {text:"int[] a = new int[3]",correct:false},
-            {text:"int a = {1,2,3}",correct:false},
-            
-        ]
-    },
-    {
-        question:"700 ml of a mixture contains milk and water in the ratio of 4:3. How much more milk is needed to make the ratio 4:1?",
-        answer:[
-            {text:"900ml",correct:false},
-            {text:"800ml",correct:false},
-            {text:"700ml",correct:false},
-            {text:"650ml",correct:true},
-            
-        ]
-    },
-    {
-        question:"what is the return type of malloc() and calloc()?",
-        answer:[
-            {text:"bool *",correct:false},
-            {text:"void *",correct:true},
-            {text:"int *",correct:false},
-            {text:"char *",correct:false},
-            
-        ]
-    },
-    {
-        question:"A=20% of B and B:C=4:5. What percentage of A is C?",
-        answer:[
-            {text:"625%",correct:true},
-            {text:"600%",correct:false},
-            {text:"125%",correct:false},
-            {text:"25%",correct:false},
-            
-        ]
-    },
-    {
-        question: "What is the binary system in computing?",
-        answer: [
-            { text: "A system of 10 digits (0-9)", correct: false },
-            { text: "A system of 8 digits (0-7)", correct: false },
-            { text: "A system of 2 digits (0 and 1)", correct: true },
-            { text: "A system of 16 digits (0-15)", correct: false },
-        ]
-    },
-    {
-        question: "What is an operating system?",
-        answer: [
-            { text: "A type of software used for word processing", correct: false },
-            { text: "The physical components of a computer", correct: false },
-            { text: "Software that manages computer hardware and provides services for computer programs", correct: true },
-            { text: "A hardware component used for data storage", correct: false },
-        ]
-    },
-    {
-        question: "What does CPU stand for?",
-        answer: [
-            { text: "Central Processing Unit", correct: true },
-            { text: "Computer Peripheral Unit", correct: false },
-            { text: "Central Print Unit", correct: false },
-            { text: "Control Panel Unit", correct: false },
-        ]
-    },
-    {
-        question: "What is RAM in a computer?",
-        answer: [
-            { text: "Random Access Memory", correct: true },
-            { text: "Read-Only Memory", correct: false },
-            { text: "Real-time Application Management", correct: false },
-            { text: "Remote Access Module", correct: false },
-        ]
-    },
-    {
-        question: "What is a compiler in programming?",
-        answer: [
-            { text: "A hardware component of a computer", correct: false },
-            { text: "A device used for input and output operations", correct: false },
-            { text: "A software that translates high-level programming code into machine code", correct: true },
-            { text: "A type of programming language", correct: false },
-        ]
-    },
-    {
-        question: "What is an IP address used for in networking?",
-        answer: [
-            { text: "To send emails", correct: false },
-            { text: "To identify a computer or device on a network", correct: true },
-            { text: "To store data on a server", correct: false },
-            { text: "To display web pages", correct: false },
-        ]
-    },
-    {
-        question: "What is a firewall in computer security?",
-        answer: [
-            { text: "A protective barrier around a computer", correct: false },
-            { text: "A software or hardware system that prevents unauthorized access to or from a private network", correct: true },
-            { text: "A type of antivirus software", correct: false },
-            { text: "A device used to increase network speed", correct: false },
-        ]
-    },
-    {
-        question: "What is a motherboard in a computer?",
-        answer: [
-            { text: "The main circuit board that houses the CPU, RAM, and other key components", correct: true },
-            { text: "A type of software used for graphics design", correct: false },
-            { text: "A peripheral device for audio input and output", correct: false },
-            { text: "A type of computer monitor", correct: false },
-        ]
-    },
-    {
-        question: "What does HTML stand for in web development?",
-        answer: [
-            { text: "Hyperlink and Text Markup Language", correct: false },
-            { text: "Highly Textual Markup Language", correct: false },
-            { text: "Hypertext Markup Language", correct: true },
-            { text: "Hyper Transfer Markup Language", correct: false },
-        ]
-    },
-    {
-        question: "What is a database in computing?",
-        answer: [
-            { text: "A computer's file system", correct: false },
-            { text: "A collection of related data organized for efficient retrieval", correct: true },
-            { text: "A type of computer virus", correct: false },
-            { text: "A network of interconnected computers", correct: false },
-        ]
-    }
-    
-];
-
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
+const easyButton = document.getElementById("easy-button");
+const mediumButton = document.getElementById("medium-button");
+const hardButton = document.getElementById("hard-button");
+const timerElement = document.getElementById("timer");
 
-
-let currentQuestionIndex =0;
+let currentQuestionIndex = 0;
+let currentQuestionCategory = null;
 let score = 0;
+let timerInterval;
+let timer = 120; // 30 seconds
 
-
-function startQuiz(){
-    currentQuestionIndex = 0;
-    score = 0;
-    nextButton.innerHtml = "Next";
-    showQuestion();
-}
-
-function showQuestion(){
-    resetState();
-    let currentQuestion = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex+1;
-    //It will add the question in the question
-    questionElement.innerHTML = questionNo+". "+ currentQuestion.question;
-
-    // It will add the answer in the options
-    currentQuestion.answer.forEach(answer =>{
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        answerButtons.appendChild(button);
-        if(answer.correct)
-        {
-            button.dataset.correct = answer.correct;
-        } 
-        button.addEventListener("click",selectAnswer);
-    });
-    
-}
-function resetState(){
-    nextButton.style.display = "none";
-    while(answerButtons.firstChild)
+const questionsData = {
+  easy: [
     {
-        answerButtons.removeChild(answerButtons.firstChild);
+      question: "What is the capital of France?",
+      answer: [
+        { text: "Berlin", correct: false },
+        { text: "Madrid", correct: false },
+        { text: "Paris", correct: true },
+        { text: "Rome", correct: false },
+      ],
+    },
+    {
+      question: "Which planet is known as the Red Planet?",
+      answer: [
+        { text: "Earth", correct: false },
+        { text: "Mars", correct: true },
+        { text: "Venus", correct: false },
+        { text: "Jupiter", correct: false },
+      ],
+    },
+    {
+      question: "What is the largest mammal in the world?",
+      answer: [
+        { text: "African Elephant", correct: false },
+        { text: "Blue Whale", correct: true },
+        { text: "Giraffe", correct: false },
+        { text: "Hippopotamus", correct: false },
+      ],
+    },
+    {
+      question: "What is the main function of the heart in the human body?",
+      answer: [
+        { text: "Pumping Blood", correct: true },
+        { text: "Digesting Food", correct: false },
+        { text: "Filtering Waste", correct: false },
+        { text: "Breathing", correct: false },
+      ],
+    },
+    {
+      question: "What is the freezing point of water in degrees Celsius?",
+      answer: [
+        { text: "-10°C", correct: false },
+        { text: "0°C", correct: true },
+        { text: "10°C", correct: false },
+        { text: "20°C", correct: false },
+      ],
+    },
+  ],
+  medium: [
+    {
+      question: "What is the largest planet in our solar system?",
+      answer: [
+        { text: "Earth", correct: false },
+        { text: "Mars", correct: false },
+        { text: "Jupiter", correct: true },
+        { text: "Saturn", correct: false },
+      ],
+    },
+    {
+      question: "Which gas is most abundant in the Earth's atmosphere?",
+      answer: [
+        { text: "Oxygen", correct: false },
+        { text: "Nitrogen", correct: true },
+        { text: "Carbon Dioxide", correct: false },
+        { text: "Helium", correct: false },
+      ],
+    },
+    {
+      question: "What is the chemical symbol for the element gold?",
+      answer: [
+        { text: "Go", correct: false },
+        { text: "Gl", correct: false },
+        { text: "Au", correct: true },
+        { text: "Ag", correct: false },
+      ],
+    },
+    {
+      question: "Which gas do plants absorb from the atmosphere for photosynthesis?",
+      answer: [
+        { text: "Oxygen", correct: false },
+        { text: "Carbon Dioxide", correct: true },
+        { text: "Nitrogen", correct: false },
+        { text: "Hydrogen", correct: false },
+      ],
+    },
+    {
+      question: "What is the chemical symbol for water?",
+      answer: [
+        { text: "H2O", correct: true },
+        { text: "CO2", correct: false },
+        { text: "NaCl", correct: false },
+        { text: "O2", correct: false },
+      ],
+    },
+  ],
+  hard: [
+    {
+      question: "What is the formula for calculating the area of a triangle?",
+      answer: [
+        { text: "A = 2 * b * h", correct: false },
+        { text: "A = b * h", correct: true },
+        { text: "A = (b + h) / 2", correct: false },
+        { text: "A = π * r^2", correct: false },
+      ],
+    },
+    {
+      question: "Who wrote the play 'Romeo and Juliet'?",
+      answer: [
+        { text: "William Shakespeare", correct: true },
+        { text: "Charles Dickens", correct: false },
+        { text: "Leo Tolstoy", correct: false },
+        { text: "Jane Austen", correct: false },
+      ],
+    },
+    {
+      question: "What is the capital of Australia?",
+      answer: [
+        { text: "Sydney", correct: false },
+        { text: "Canberra", correct: true },
+        { text: "Melbourne", correct: false },
+        { text: "Perth", correct: false },
+      ],
+    },
+    {
+      question: "In which year did the Titanic sink?",
+      answer: [
+        { text: "1905", correct: false },
+        { text: "1912", correct: true },
+        { text: "1920", correct: false },
+        { text: "1931", correct: false },
+      ],
+    },
+    {
+      question: "What is the chemical formula for table salt?",
+      answer: [
+        { text: " NaCl", correct: true },
+        { text: " K2SO4", correct: false },
+        { text: " H2O", correct: false },
+        { text: " CO2", correct: false },
+      ],
+    },
+  ],
+};
+
+// Function to start the timer
+function startTimer() {
+  timerInterval = setInterval(function () {
+    timer--;
+    if (timer <= 0) {
+      clearInterval(timerInterval);
+      timer = 0; // Ensure timer doesn't go negative
+      showScore();
     }
+    updateTimerDisplay();
+  }, 1000); // Update the timer every second
 }
 
-function selectAnswer(e){
-    const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.correct ==="true";
-    if(isCorrect)
-    {
-        selectedBtn.classList.add("correct");
-        score++;   
-    }
-    else
-    {
-        selectedBtn.classList.add("incorrect");   
-    }
-    Array.from(answerButtons.children).forEach(button =>{
-        if(button.dataset.correct === "true"){
-            button.classList.add("correct");
-        }
-        button.disabled = true;
-    });
-    nextButton.style.display ="block";
+// Function to update the timer display
+function updateTimerDisplay() {
+  timerElement.textContent = `Time Left: ${timer} seconds`;
 }
-function handleNextButton(){
+
+easyButton.addEventListener("click", () => {
+  currentQuestionCategory = "easy";
+  startQuiz();
+});
+
+mediumButton.addEventListener("click", () => {
+  currentQuestionCategory = "medium";
+  startQuiz();
+});
+
+hardButton.addEventListener("click", () => {
+  currentQuestionCategory = "hard";
+  startQuiz();
+});
+
+function startQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  timer = 120; // Reset the timer
+  nextButton.innerHTML = "Next";
+  showQuestion();
+  startTimer(); // Start the timer
+}
+
+function showQuestion() {
+  resetState();
+  const currentQuestion = questionsData[currentQuestionCategory][currentQuestionIndex];
+  questionElement.innerHTML = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+
+  currentQuestion.answer.forEach((answer, index) => {
+    const button = document.createElement("button");
+    button.innerHTML = answer.text;
+    button.classList.add("btn");
+    answerButtons.appendChild(button);
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    button.addEventListener("click", selectAnswer);
+  });
+}
+
+function resetState() {
+  nextButton.style.display = "none";
+  while (answerButtons.firstChild) {
+    answerButtons.removeChild(answerButtons.firstChild);
+  }
+}
+
+function selectAnswer(e) {
+  const selectedBtn = e.target;
+  const isCorrect = selectedBtn.dataset.correct === "true";
+  if (isCorrect) {
+    selectedBtn.classList.add("correct");
+    score++;
+  } else {
+    selectedBtn.classList.add("incorrect");
+  }
+  Array.from(answerButtons.children).forEach((button) => {
+    if (button.dataset.correct === "true") {
+      button.classList.add("correct");
+    }
+    button.disabled = true;
+  });
+  nextButton.style.display = "block";
+}
+
+
+function handleNextButton() {
+  if (currentQuestionIndex < questionsData[currentQuestionCategory].length - 1) {
     currentQuestionIndex++;
-    if(currentQuestionIndex< questions.length)
-    {
-        showQuestion();
-    }
-    else{
-        showScore();
-    }
+    showQuestion();
+  } else {
+    showScore();
+  }
 }
-function showScore(){
-    resetState();
-    questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
-    nextButton.innerHTML = "Play Again";
-    nextButton.style.display = "block";
+
+nextButton.addEventListener("click", handleNextButton);
+
+// Function to save the score in local storage
+function saveScore(difficulty, score) {
+  const scores = JSON.parse(localStorage.getItem("quizScores")) || {};
+  scores[difficulty] = score;
+  localStorage.setItem("quizScores", JSON.stringify(scores));
 }
-nextButton.addEventListener("click",()=>{
-    if(currentQuestionIndex<questions.length)
-    {
-        handleNextButton();
-    }
-    else{
-        startQuiz();
-    }
-})
-startQuiz();
+
+// Function to get the score from local storage
+function getScore(difficulty) {
+  const scores = JSON.parse(localStorage.getItem("quizScores")) || {};
+  return scores[difficulty] || 0;
+}
+
+function showScore() {
+  resetState();
+  const currentScore = score;
+  const bestScore = getScore(currentQuestionCategory);
+  clearInterval(timerInterval); // Pause the timer
+  if (currentScore > bestScore) {
+    saveScore(currentQuestionCategory, currentScore);
+  }
+  questionElement.innerHTML = `You scored ${currentScore} out of ${questionsData[currentQuestionCategory].length}!<br>Best Score: ${bestScore}`;
+  nextButton.innerHTML = "Play Again";
+  nextButton.style.display = "block";
+}
+
+const historyButton = document.getElementById("history-button");
+
+  historyButton.addEventListener("click", function () {
+    window.location.href = "history.html"; // Navigate to the history page
+  });
+
+
+
+
