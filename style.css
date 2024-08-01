@@ -1,14 +1,15 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 }
-body{
+
+body {
     background: #001e4d;
 }
 
-.app{
+.app {
     background: #ffff;
     width: 90%;
     max-width: 600px;
@@ -17,60 +18,73 @@ body{
     padding: 30px;
 }
 
-.app h1{
+.bestScore{
+    width: 100%;
+    display: flex;
+    font-weight: 600;
+    color: #001e4d;
+    justify-content: end;
+}
+
+.app h1 {
     font-weight: 25px;
     color: #001e4d;
     font-weight: 600;
     border-bottom: 1px solid #333;
     padding-bottom: 30px;
 }
-.quiz{
+
+.quiz {
     padding: 20px 0;
 
 }
 
-.quiz h2{
-    font-size:18px;
-    color:#001e4d;
+.quiz h2 {
+    font-size: 18px;
+    color: #001e4d;
     font-weight: 600;
 }
 
-.btn{
+.btn {
     background: #fff;
     color: #222;
-    font-weight:500;
+    font-weight: 500;
     width: 100%;
-    border:1px solid #222;
+    border: 1px solid #222;
     padding: 10px;
     margin: 10px 0;
     text-align: left;
     border-radius: 4px;
     cursor: pointer;
-    transition:all 0.3s;
+    transition: all 0.3s;
 }
-.btn:hover:not([disabled]){
+
+.btn:hover:not([disabled]) {
     background: #222;
-    color:#fff;
+    color: #fff;
 }
-.btn:disabled{
-    cursor:no-drop;
+
+.btn:disabled {
+    cursor: no-drop;
 }
-#next-btn{
+
+#next-btn {
     background: #001e4d;
-    color:#fff;
+    color: #fff;
     font-weight: 500;
-    width:150px;
-    border:0;
+    width: 150px;
+    border: 0;
     padding: 10px;
     margin: 20px auto 0;
     border-radius: 4px;
     cursor: pointer;
     display: none;
 }
-.correct{
+
+.correct {
     background: #9aeabc;
 }
-.incorrect{
+
+.incorrect {
     background: #ff9393;
 }
-
